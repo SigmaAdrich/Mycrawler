@@ -1,6 +1,14 @@
 #coding=utf-8
 import urllib
 from bs4 import BeautifulSoup as bs
+import re
+ 
+# def match(urls):
+# 	pattern = re.compile(r'http')
+# 	match = pattern.match(urls)
+# 	if match:
+# 		print match.group()
+
 def getHtml(url):
 	page=urllib.urlopen(url)
 	html=page.read()
@@ -11,6 +19,13 @@ def save(filename, contents):
   fh.write(contents) 
   fh.close() 
 
+#find all links in a
+def FindLinks(soup):
+	for link in soup.find_all('a'):
+		url=link.get('href')
+		nextpage=getHtml(url)
+		print(nextpage)
+
 
 
 save('file.name', 'some stuff') 
@@ -18,5 +33,29 @@ url="http://www.ifeng.com"
 
 html=getHtml(url)
 soup=bs(html,'html.parser')
-save('page',html)
-print soup.find_all("a")
+
+
+news=soup.find(id="headLineDefault")
+
+FindLinks(news)
+print("over")
+# #title
+# print(soup.title)
+# print(soup.title.name)
+# print(soup.title.string)
+# print(soup.title.parent.name)
+# print(soup.p)
+# print(soup.p['class'])
+# print(soup.a)
+# print(soup.find_all('a'))
+# # find href in a
+# print(soup.a['href'])
+
+
+
+
+
+
+
+# #save html
+# save('page',html)
