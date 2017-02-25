@@ -1,0 +1,22 @@
+#coding=utf-8
+import urllib
+from bs4 import BeautifulSoup as bs
+def getHtml(url):
+	page=urllib.urlopen(url)
+	html=page.read()
+	return html
+
+def save(filename, contents): 
+  fh = open(filename, 'w') 
+  fh.write(contents) 
+  fh.close() 
+
+
+
+save('file.name', 'some stuff') 
+url="http://www.ifeng.com"
+
+html=getHtml(url)
+soup=bs(html,'html.parser')
+save('page',html)
+print soup.find_all("a")
