@@ -15,10 +15,10 @@ def getHtml(url):
 	return html
 
 
-def save(filename, contents): 
-  fh = open(filename, 'w') 
-  fh.write(contents) 
-  fh.close() 
+def savebetter(filename,soup):
+	better=soup.prettify("utf-8")
+	with open(filename,"a") as file:
+		file.write(better)
 
 #find all links in a in First Page
 def FindLinks(soup):
@@ -58,14 +58,14 @@ def Third_Soup(soup):
 		title=soup.find(class_="topic-content")
 		text=title.find('p')
 		print(text)
+		savebetter('page',text)
 		time.sleep(5)
 	except Exception as e:
 		pass
 
 
 
-
-save('file.name', 'some stuff') 
+ 
 url="https://www.douban.com/search?source=suggest&q=北京"
 
 html=getHtml(url)
@@ -88,12 +88,3 @@ print("over")
 # print(soup.find_all('a'))
 # # find href in a
 # print(soup.a['href'])
-
-
-
-
-
-
-
-# #save html
-# save('page',html)

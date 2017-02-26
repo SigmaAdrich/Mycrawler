@@ -14,8 +14,8 @@ def getHtml(url):
 	html=page.read()
 	return html
 
-def save(filename, contents): 
-  fh = open(filename, 'w') 
+def savehtml(filename, contents): 
+  fh = open(filename, 'w',encoding='utf-8') 
   fh.write(contents) 
   fh.close() 
 
@@ -26,18 +26,25 @@ def FindLinks(soup):
 		nextpage=getHtml(url)
 		print(nextpage)
 
+def savebetter(filename,soup):
+	better=soup.prettify("utf-8")
+	with open(filename,"wb") as file:
+		file.write(better)
 
 
-save('file.name', 'some stuff') 
 url="http://www.ifeng.com"
 
 html=getHtml(url)
 soup=bs(html,'html.parser')
+savebetter("page",soup)
 
 
-news=soup.find(id="headLineDefault")
+# news=soup.find(id="headLineDefault")
 
-FindLinks(news)
+# FindLinks(news)
+
+#save html
+
 print("over")
 # #title
 # print(soup.title)
@@ -57,5 +64,4 @@ print("over")
 
 
 
-# #save html
-# save('page',html)
+
